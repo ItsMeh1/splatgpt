@@ -1,0 +1,14 @@
+{
+  "note": "This file is auto-updated by GitHub Actions using splatnet3-scraper (XBattleHistories + EventBattleHistories). Static hosting cannot call SplatNet directly (needs NSO session token), so we pre-fetch daily. Do NOT edit manually - see scripts/fetch_top500.py",
+  "updated_at": "2026-09-21T00:00:00Z",
+  "source": "placeholder until first Action run - live fallback is splatoon3.ink for rotations",
+  "x_rank_top500": [],
+  "event_top_scores": [],
+  "example_entry": {
+    "rank": 1,
+    "name": "splatgpt",
+    "x_power": 3200.5,
+    "weapon": "Splattershot",
+    "mode": "Splat Zones"
+  }
+}
