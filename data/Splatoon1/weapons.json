@@ -1,0 +1,20 @@
+[
+  {"id": "splattershot", "name": "Splattershot", "class": "Shooter", "sub": "Burst Bomb", "special": "Bomb Rush", "range": 50, "notes": "S1 default slayer."},
+  {"id": "tentatek_splattershot", "name": "Tentatek Splattershot", "class": "Shooter", "sub": "Suction Bomb", "special": "Inkzooka", "range": 50, "notes": "Competitive king in S1."},
+  {"id": "splattershot_jr", "name": "Splattershot Jr.", "class": "Shooter", "sub": "Splat Bomb", "special": "Bubbler", "range": 35, "notes": "Starter weapon."},
+  {"id": "aerospray_mg", "name": "Aerospray MG", "class": "Shooter", "sub": "Ink Mine", "special": "Bubbler", "range": 30, "notes": "Turf king."},
+  {"id": "52_gal", "name": ".52 Gal", "class": "Shooter", "sub": "Splash Wall", "special": "Killer Wail", "range": 48, "notes": "2-shot."},
+  {"id": "96_gal", "name": ".96 Gal", "class": "Shooter", "sub": "Sprinkler", "special": "Echolocator", "range": 65, "notes": "Heavy shooter."},
+  {"id": "jet_squelcher", "name": "Jet Squelcher", "class": "Shooter", "sub": "Splash Wall", "special": "Inkzooka", "range": 75, "notes": "Longest shooter S1."},
+  {"id": "splat_charger", "name": "Splat Charger", "class": "Charger", "sub": "Splat Bomb", "special": "Bomb Rush", "range": 85, "notes": "Sniper."},
+  {"id": "e_liter_3k", "name": "E-liter 3K", "class": "Charger", "sub": "Burst Bomb", "special": "Echolocator", "range": 100, "notes": "Longest S1."},
+  {"id": "splat_roller", "name": "Splat Roller", "class": "Roller", "sub": "Suction Bomb", "special": "Killer Wail", "range": 35, "notes": "Iconic roller."},
+  {"id": "dynamo_roller", "name": "Dynamo Roller", "class": "Roller", "sub": "Sprinkler", "special": "Echolocator", "range": 55, "notes": "Slow heavy."},
+  {"id": "inkbrush", "name": "Inkbrush", "class": "Brush", "sub": "Sprinkler", "special": "Inkstrike", "range": 15, "notes": "Fast runner."},
+  {"id": "blaster", "name": "Blaster", "class": "Blaster", "sub": "Disruptor", "special": "Bubbler", "range": 35, "notes": "AoE."},
+  {"id": "range_blaster", "name": "Range Blaster", "class": "Blaster", "sub": "Suction Bomb", "special": "Inkstrike", "range": 55, "notes": "Long blast."},
+  {"id": "slosher", "name": "Slosher", "class": "Slosher", "sub": "Burst Bomb", "special": "Inkzooka", "range": 50, "notes": "Bucket."},
+  {"id": "heavy_splatling", "name": "Heavy Splatling", "class": "Splatling", "sub": "Splash Wall", "special": "Inkzooka", "range": 75, "notes": "Gatling debut."},
+  {"id": "mini_splatling", "name": "Mini Splatling", "class": "Splatling", "sub": "Disruptor", "special": "Bubbler", "range": 55, "notes": "Fast splatling."},
+  {"id": "splat_brella_note", "name": "Note: Brellas/Dualies did not exist in S1", "class": "Info", "sub": "-", "special": "-", "range": 0, "notes": "Added in Splatoon 2."}
+]

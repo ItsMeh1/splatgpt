@@ -1,0 +1,8 @@
+[
+  {"id": "turf_war", "name": "Turf War", "description": "4v4 ink the most turf. Only mode at S1 launch.", "ranked": false, "team_size": 4},
+  {"id": "splat_zones", "name": "Splat Zones", "description": "King of the hill zone control. Added Aug 2015.", "ranked": true, "team_size": 4},
+  {"id": "tower_control", "name": "Tower Control", "description": "Ride tower. Added Nov 2015.", "ranked": true, "team_size": 4},
+  {"id": "rainmaker", "name": "Rainmaker", "description": "Carry to pedestal. Added Jan 2016.", "ranked": true, "team_size": 4},
+  {"id": "private_battle", "name": "Private Battle", "description": "Custom lobbies.", "ranked": false, "team_size": "2-8"},
+  {"id": "splatfest", "name": "Splatfest", "description": "Cats vs Dogs first theme. Callie vs Marie. Inkopolis Plaza.", "ranked": false, "team_size": 4}
+]
