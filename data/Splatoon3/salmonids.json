@@ -1,0 +1,210 @@
+[
+ {
+  "id": "sakeartillery",
+  "type": "SakeArtillery",
+  "name": "Big Shot",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 25
+ },
+ {
+  "id": "sakebigmouth",
+  "type": "SakeBigMouth",
+  "name": "Mudmouth",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 6,
+  "golden_eggs_on_hit": 18
+ },
+ {
+  "id": "sakebigmouthgold",
+  "type": "SakeBigMouthGold",
+  "name": "Mudmouth",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 6,
+  "golden_eggs_on_hit": 18
+ },
+ {
+  "id": "sakecarrier",
+  "type": "SakeCarrier",
+  "name": "SakeCarrier",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 0,
+  "golden_eggs_on_hit": 0
+ },
+ {
+  "id": "sakecopter",
+  "type": "SakeCopter",
+  "name": "Chinook",
+  "category": "Other",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 1
+ },
+ {
+  "id": "sakedolphin",
+  "type": "SakeDolphin",
+  "name": "Flipper-Flopper",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 15
+ },
+ {
+  "id": "sakeflybagman",
+  "type": "SakeFlyBagman",
+  "name": "Snatcher",
+  "category": "Other",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 3
+ },
+ {
+  "id": "sakejaw",
+  "type": "SakeJaw",
+  "name": "Megalodontia",
+  "category": "Boss",
+  "golden_eggs_on_kill": 20,
+  "golden_eggs_on_hit": 800
+ },
+ {
+  "id": "sakepillar",
+  "type": "SakePillar",
+  "name": "Fish Stick",
+  "category": "Rare",
+  "golden_eggs_on_kill": 7,
+  "golden_eggs_on_hit": 8
+ },
+ {
+  "id": "sakerope",
+  "type": "SakeRope",
+  "name": "Horrorboros",
+  "category": "Boss",
+  "golden_eggs_on_kill": 20,
+  "golden_eggs_on_hit": 1000
+ },
+ {
+  "id": "sakesaucer",
+  "type": "SakeSaucer",
+  "name": "Slammin' Lid",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 13
+ },
+ {
+  "id": "sakeship",
+  "type": "SakeShip",
+  "name": "SakeShip",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 0,
+  "golden_eggs_on_hit": 0
+ },
+ {
+  "id": "sakediver",
+  "type": "Sakediver",
+  "name": "Maws",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 15
+ },
+ {
+  "id": "sakedozer",
+  "type": "Sakedozer",
+  "name": "Griller",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 10,
+  "golden_eggs_on_hit": 60
+ },
+ {
+  "id": "sakelienbomber",
+  "type": "SakelienBomber",
+  "name": "Steelhead",
+  "category": "Rare",
+  "golden_eggs_on_kill": 7,
+  "golden_eggs_on_hit": 8
+ },
+ {
+  "id": "sakeliencuptwins",
+  "type": "SakelienCupTwins",
+  "name": "Flyfish",
+  "category": "Rare",
+  "golden_eggs_on_kill": 6,
+  "golden_eggs_on_hit": 12
+ },
+ {
+  "id": "sakeliengeyser",
+  "type": "SakelienGeyser",
+  "name": "SakelienGeyser",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 10,
+  "golden_eggs_on_hit": 0
+ },
+ {
+  "id": "sakeliengiant",
+  "type": "SakelienGiant",
+  "name": "Cohozuna",
+  "category": "Boss",
+  "golden_eggs_on_kill": 20,
+  "golden_eggs_on_hit": 800
+ },
+ {
+  "id": "sakeliengolden",
+  "type": "SakelienGolden",
+  "name": "Goldie",
+  "category": "EventRare",
+  "golden_eggs_on_kill": 6,
+  "golden_eggs_on_hit": 12
+ },
+ {
+  "id": "sakelienlarge",
+  "type": "SakelienLarge",
+  "name": "Cohock",
+  "category": "Zako",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 10
+ },
+ {
+  "id": "sakelienshield",
+  "type": "SakelienShield",
+  "name": "Scrapper",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 13
+ },
+ {
+  "id": "sakeliensmall",
+  "type": "SakelienSmall",
+  "name": "Smallfry",
+  "category": "Zako",
+  "golden_eggs_on_kill": 2,
+  "golden_eggs_on_hit": 1
+ },
+ {
+  "id": "sakeliensnake",
+  "type": "SakelienSnake",
+  "name": "Steel Eel",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 13
+ },
+ {
+  "id": "sakelienstandard",
+  "type": "SakelienStandard",
+  "name": "Chum",
+  "category": "Zako",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 3
+ },
+ {
+  "id": "sakelientower",
+  "type": "SakelienTower",
+  "name": "Stinger",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 14
+ },
+ {
+  "id": "sakerocket",
+  "type": "Sakerocket",
+  "name": "Drizzler",
+  "category": "Rare",
+  "golden_eggs_on_kill": 3,
+  "golden_eggs_on_hit": 18
+ }
+]
