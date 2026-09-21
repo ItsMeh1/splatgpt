@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SplatGPT — Splatoon Knowledge Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css?v=11" />
+  <meta name="description" content="SplatGPT: a static knowledge assistant for Splatoon 1/2/3. Local data, live rotations via splatoon3.ink, Top 500 via splatnet3-scraper snapshots." />
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <button id="brand" title="SplatGPT — expand sidebar">
+        <i class="fa-solid fa-droplet"></i>
+        <span class="label">SplatGPT</span>
+      </button>
+
+      <button id="collapse-btn" title="Collapse sidebar">
+        <i class="fa-solid fa-angles-left"></i>
+        <span class="label">Collapse sidebar</span>
+      </button>
+
+      <button id="nav-new" title="New chat">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span class="label">New chat</span>
+      </button>
+
+      <button id="nav-rotations" title="Current rotations">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span class="label">Current rotations</span>
+      </button>
+
+      <button id="nav-recents" title="Recent chats">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span class="label">Recent chats</span>
+      </button>
+
+      <button id="nav-settings" title="Settings">
+        <i class="fa-solid fa-gear"></i>
+        <span class="label">Settings</span>
+      </button>
+
+      <div class="side-footer">
+        <div id="live-dot" class="live-dot"><i class="fa-solid fa-circle"></i> <span id="live-text">Connecting…</span></div>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header id="topbar">
+        <div class="top-title" id="view-title">Chat</div>
+        <div class="game-toggle" role="tablist" aria-label="Select game">
+          <button data-game="Splatoon1" role="tab">Splatoon 1</button>
+          <button data-game="Splatoon2" role="tab">Splatoon 2</button>
+          <button data-game="Splatoon3" role="tab" class="active">Splatoon 3</button>
+        </div>
+      </header>
+
+      <!-- Chat view -->
+      <section id="view-chat" class="view">
+        <div id="chat"></div>
+        <div id="suggestions">
+          <button data-q="What is the current X Battle rotation?"><i class="fa-solid fa-crosshairs"></i> Current X Battle rotation</button>
+          <button data-q="List all modes"><i class="fa-solid fa-gamepad"></i> List modes</button>
+          <button data-q="Show the Top 500 X leaderboard"><i class="fa-solid fa-trophy"></i> Top 500</button>
+        </div>
+        <form id="input-bar">
+          <input id="input" autocomplete="off" placeholder="Ask about weapons, maps, modes, or rotations…" />
+          <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+        <div class="disclaimer">Community reference tool. Not affiliated with Nintendo. Local data in <code>/data</code>. Rotations: splatoon3.ink. Rankings: splatnet3-scraper snapshots.</div>
+      </section>
+
+      <!-- Rotations view (no chat) -->
+      <section id="view-rotations" class="view" hidden>
+        <div class="page">
+          <div class="page-head">
+            <h2><i class="fa-solid fa-arrows-rotate"></i> Current rotations</h2>
+            <button id="refresh-rotations"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+          </div>
+          <p class="muted">Live data on the current rotations, up to the second.</p>
+          <div id="rotations-grid"></div>
+        </div>
+      </section>
+
+      <!-- Recent chats view -->
+      <section id="view-recents" class="view" hidden>
+        <div class="page">
+          <div class="page-head">
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Recent chats</h2>
+            <span id="recents-count" class="count-pill"></span>
+            <button id="clear-chats"><i class="fa-solid fa-trash-can"></i> Clear all</button>
+          </div>
+          <p class="muted">Conversations are stored locally in this browser.</p>
+          <div id="recents-list"></div>
+        </div>
+      </section>
+
+      <!-- Settings view -->
+      <section id="view-settings" class="view" hidden>
+        <div class="page">
+          <div class="page-head">
+            <h2><i class="fa-solid fa-gear"></i> Settings</h2>
+          </div>
+          <p class="muted">Stored locally in this browser only. Nothing leaves your device except the public APIs the app already uses.</p>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-palette"></i> Appearance</h3>
+            <label class="field"><span>Theme</span>
+              <select id="setting-theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+            <div class="field"><span>Accent</span>
+              <div class="swatches">
+                <button data-accent-pick="ink" title="Ink blue"><i class="fa-solid fa-droplet"></i> Ink</button>
+                <button data-accent-pick="turf" title="Turf lime"><i class="fa-solid fa-flag"></i> Turf</button>
+                <button data-accent-pick="magenta" title="Magenta"><i class="fa-solid fa-fire"></i> Magenta</button>
+                <button data-accent-pick="aqua" title="Aqua"><i class="fa-solid fa-fish"></i> Aqua</button>
+              </div>
+            </div>
+            <div class="field"><span>Tour</span>
+              <div class="row" style="margin-top:0">
+                <button id="setting-tour"><i class="fa-solid fa-route"></i> Replay guided tour</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-key"></i> sendou.ink API token <span class="tag">optional</span></h3>
+            <p class="muted">Build pages need no token. Token-gated lookups (user profiles, tournaments) need a free personal token from <a href="https://sendou.ink/api" target="_blank" rel="noopener">sendou.ink/api</a>. It is kept in localStorage and only sent to sendou.ink.</p>
+            <label class="field"><span>Token</span>
+              <input id="setting-sendou-token" type="password" autocomplete="off" placeholder="Paste token…" />
+            </label>
+            <div class="row">
+              <button id="setting-save-token"><i class="fa-solid fa-floppy-disk"></i> Save token</button>
+              <button id="setting-clear-token"><i class="fa-solid fa-eraser"></i> Remove</button>
+              <span id="setting-saved" class="muted"></span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-circle-info"></i> About</h3>
+            <p class="muted">Terms of use, data sources, and credits.</p>
+            <div class="row">
+              <button id="open-about"><i class="fa-solid fa-arrow-right"></i> Open About</button>
+            </div>
+          </div>
+
+          <div class="settings-card danger">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Local data</h3>
+            <div class="row">
+              <button id="setting-wipe"><i class="fa-solid fa-trash-can"></i> Erase chats & settings on this device</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About view (full page, opened from Settings) -->
+      <section id="view-about" class="view" hidden>
+        <div class="page">
+          <div class="page-head">
+            <button id="about-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <h2><i class="fa-solid fa-circle-info"></i> About SplatGPT</h2>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-file-lines"></i> What is this?</h3>
+            <p class="muted">SplatGPT is a fan-made, static reference-based assistant for Splatoon 1, 2, and 3. It searches community created datasets, shows live rotations, archived X rankings, and links to competitive build resources. There is no account system and no server: the site is static files, and your chats and settings stay in this browser and are private.</p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-scale-balanced"></i> Terms of use</h3>
+            <p class="muted">This is an unofficial fan project. Not affiliated with, endorsed, or sponsored by Nintendo. Splatoon and all related game content are trademarks of Nintendo. Data is provided as-is for reference; rotations, rankings, and builds can change at any time. Do not enter Nintendo, sendou.ink, or other account passwords here — the only token this app accepts is a sendou.ink read token, stored locally and sent only to sendou.ink.</p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-database"></i> Data sources & credits</h3>
+            <p class="muted"><ul>
+              <li>Local datasets (community-contributed data on weapons, maps, modes, story mode, etc)</li>
+              <li>Mined game parameters and text (weapon stats, kits, gear, abilities, Salmonids): <a href="https://gitlab.com/AeonSake2/splat3-data" target="_blank" rel="noopener">splat3-data</a>, imported via <code>scripts/import_gamedata.py</code></li>
+              <li>Live rotations, salmon run shifts, icons, and X Battle data from <a href="https://splatoon3.ink" target="_blank" rel="noopener">splatoon3.ink</a></li>
+              <li>Ranking snapshots: SplatNet 3 via <a href="https://github.com/cesaregarza/SplatNet3_Scraper" target="_blank" rel="noopener">splatnet3-scraper</a></li>
+              <li>Builds and competitive data via <a href="https://sendou.ink" target="_blank" rel="noopener">sendou.ink</a> (only if you provide your own API key); gear and ability images via the sendou.ink public asset CDN</li>
+              <li>Some icons from Font Awesome.</li>
+            </ul></p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-handshake-angle"></i> Contributing</h3>
+            <p class="muted">Contributing is currently not supported.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="main.js?v=11"></script>
+</body>
+</html>
