@@ -1,7 +1,6 @@
 {
-  "note": "This file is auto-updated by GitHub Actions using splatnet3-scraper (XBattleHistories + EventBattleHistories). Static hosting cannot call SplatNet directly (needs NSO session token), so we pre-fetch daily. Do NOT edit manually - see scripts/fetch_top500.py",
-  "updated_at": "2026-09-21T00:00:00Z",
-  "source": "placeholder until first Action run - live fallback is splatoon3.ink for rotations",
+  "updated_at": "2026-09-21T23:21:07.522370Z",
+  "source": "placeholder (no SN3S_SESSION_TOKEN secret set)",
   "x_rank_top500": [],
   "event_top_scores": [],
   "example_entry": {
