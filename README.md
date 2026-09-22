@@ -10,3 +10,7 @@ In the [data folder](./data), lots of data is held for Splatoon 1, 2, and 3. The
 
 ## Contributing Data
 To contribute data, fill out this [form](https://forms.gle/xF9hbrTgNnbW32LQ8).
+
+
+## Extras
+This is a fan-made project and is not affiliated with Nintendo.
