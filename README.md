@@ -19,7 +19,7 @@ SplatGPT is a great tool for Splatoon players of any game in the series because;
 | -------- | ------- |
 | Live  | View live Top 500 X Battle rankings that are updated hourly, live rotations, and the live Salmon Run rotation. Everything is live! |
 | Chats | Talk with a bot about thousands of different Splatoon-related topics to quickly find information that you need. Currently available for only Splatoon 1, 2, and 3.  |
-| Goals  | Create long-time or short goals for different topics, such as badges, ranks, xp levels, and more. SplatGPT serves to you as a helpful coach, helping you every step of the journey. |
+| Goals  | Create long-time or short goals for different topics, such as badges, ranks, xp levels, and more. SplatGPT serves to you as a helpful coach, helping you every step of the journey. Your coach automatically creates you a Session Plan on demand, which helps you reach your goal at a steady pace by your deadline. You can also update your plan whenever you get ahead or fall behind.|
 
 
 ## Contributing Data
