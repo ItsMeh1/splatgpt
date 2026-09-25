@@ -1,5 +1,5 @@
 # 🫟 SplatGPT
-A static, data-driven assistant for the Splatoon series with up-to-date data, real-time Top 10 & Top 500 leaderboards, and more.
+A static, data-driven assistant for the Splatoon series with up-to-date data, real-time Top 10 & Top 500 leaderboards, goal creation, and more.
 
 ## ？How it works
 In the [data folder](./data), lots of data is held for Splatoon 1, 2, and 3. The "bot" then searches through that data based on the users request. It also gets data from various other sources, being:
@@ -13,6 +13,14 @@ SplatGPT is a great tool for Splatoon players of any game in the series because;
 - Tons and tons of information is accessible to anyone, for free, and its on the internet.
 - SplatGPT offers real-time Top 10 and Top 500 leaderboards, along with the current rotations and Salmon Run.
 - All your data is private and reaches no servers. Your data exists on your device, the way its meant to be.
+
+## Features
+| Feature    | Description |
+| -------- | ------- |
+| Live  | View live Top 500 X Battle rankings that are updated hourly, live rotations, and the live Salmon Run rotation. Everything is live! |
+| Chats | Talk with a bot about thousands of different Splatoon-related topics to quickly find information that you need. Currently available for only Splatoon 1, 2, and 3.  |
+| Goals  | Create long-time or short goals for different topics, such as badges, ranks, xp levels, and more. SplatGPT serves to you as a helpful coach, helping you every step of the journey. |
+
 
 ## Contributing Data
 Contributing is greatly appreciated, especially with the new updates in Splatoon 3 and the new Splatoon Raiders game leaving lots more to be discovered. By contributing data, your not only helping SplatGPT but also others who use it in finding that data easily. To contribute data, go [here](https://forms.gle/xF9hbrTgNnbW32LQ8).
