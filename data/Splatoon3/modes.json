@@ -1,0 +1,16 @@
+[
+  {"id": "turf_war", "name": "Turf War", "description": "3-minute 4v4. Ink the most turf to win. No ranks.", "ranked": false, "team_size": 4},
+  {"id": "splat_zones", "name": "Splat Zones", "description": "Control ink zone(s) to drain timer. First to 0 wins.", "ranked": true, "team_size": 4},
+  {"id": "tower_control", "name": "Tower Control", "description": "Ride the tower to checkpoints. Furthest distance wins.", "ranked": true, "team_size": 4},
+  {"id": "rainmaker", "name": "Rainmaker", "description": "Carry the Rainmaker to enemy pedestal. Like capture-the-flag.", "ranked": true, "team_size": 4},
+  {"id": "clam_blitz", "name": "Clam Blitz", "description": "Collect clams, throw Power Clam into enemy basket. Basketball with clams.", "ranked": true, "team_size": 4},
+  {"id": "anarchy_series", "name": "Anarchy Battle (Series)", "description": "Solo queue ranked. Win 5 before losing 3 to earn series points and rank up from C- to S+.", "ranked": true, "team_size": 4},
+  {"id": "anarchy_open", "name": "Anarchy Battle (Open)", "description": "Play solo or with friends, earn Anarchy Power per rotation.", "ranked": true, "team_size": 4},
+  {"id": "x_battle", "name": "X Battle", "description": "Unlocks after reaching S+ . 4v4 elite ladder with X Power per mode/division. +75 X Power for a 3-0 like yours!", "ranked": true, "team_size": 4},
+  {"id": "private_battle", "name": "Private Battle", "description": "Custom lobbies, all modes/maps, password protected.", "ranked": false, "team_size": "2-8"},
+  {"id": "salmon_run", "name": "Salmon Run Next Wave", "description": "4-player PvE. Collect Golden Eggs vs Salmonids across waves. Shifts rotate maps/weapons.", "ranked": false, "team_size": 4},
+  {"id": "big_run", "name": "Big Run", "description": "Salmon Run invasion of a Turf War stage. Limited-time high scores.", "ranked": false, "team_size": 4},
+  {"id": "tableturf", "name": "Tableturf Battle", "description": "1v1 card battler in Splatsville. 150+ cards.", "ranked": false, "team_size": 1},
+  {"id": "splatfest", "name": "Splatfest", "description": "Weekend 3-team Turf War festival: Open + Pro + Tricolor. Deep Cut hosts.", "ranked": false, "team_size": 4},
+  {"id": "challenge", "name": "Challenge / Event Battle", "description": "Limited-time special rules (e.g. Foggy Notion, Tower Control with faster towers).", "ranked": false, "team_size": 4}
+]

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SplatGPT — Splatoon Knowledge Assistant</title>
+  <link rel="icon" href="coolsite/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css?v=220" />
+  <meta name="description" content="SplatGPT: a static knowledge assistant for Splatoon 1/2/3. Local data, live rotations via splatoon3.ink, Top 500 via splatnet3-scraper snapshots." />
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <button id="brand" title="SplatGPT — expand sidebar">
+        <img class="brand-logo" src="coolsite/logo.svg" alt="" />
+        <span class="label">SplatGPT</span>
+      </button>
+
+      <button id="collapse-btn" title="Collapse sidebar">
+        <i class="fa-solid fa-angles-left"></i>
+        <span class="label">Collapse sidebar</span>
+      </button>
+
+      <button id="nav-chats" title="Chats">
+        <i class="fa-solid fa-comments"></i>
+        <span class="label">Chats</span>
+        <span class="nav-count" id="nav-chat-count" hidden></span>
+      </button>
+
+      <button id="nav-live" title="Live">
+        <i class="fa-solid fa-bolt"></i>
+        <span class="label">Live</span>
+      </button>
+
+      <button id="nav-goals" title="Goals">
+        <i class="fa-solid fa-bullseye"></i>
+        <span class="label">Goals</span>
+      </button>
+
+      <button id="nav-me" title="My player">
+        <i class="fa-solid fa-id-card"></i>
+        <span class="label">My player</span>
+      </button>
+
+      <button id="nav-settings" title="Settings">
+        <i class="fa-solid fa-gear"></i>
+        <span class="label">Settings</span>
+      </button>
+
+      <div class="side-footer" id="notif-footer" hidden>
+        <button id="nav-notifs" title="Notifications">
+          <i class="fa-solid fa-bell"></i>
+          <span class="label">Notifications</span>
+          <span class="notif-badge" id="notif-badge" hidden></span>
+        </button>
+      </div>
+    </aside>
+
+    <div id="pill-nav" aria-label="Navigation">
+      <button id="pill-brand" title="SplatGPT — home"><span class="pill-ico"><img class="brand-logo" src="coolsite/logo.svg" alt="" /></span><span class="label">SplatGPT</span></button>
+      <span class="pill-sep"></span>
+      <button id="pill-chats" title="Chats"><span class="pill-ico"><i class="fa-solid fa-comments"></i><span class="nav-count" id="pill-chat-count" hidden></span></span><span class="label">Chats</span></button>
+      <button id="pill-live" title="Live"><span class="pill-ico"><i class="fa-solid fa-bolt"></i></span><span class="label">Live</span></button>
+      <button id="pill-goals" title="Goals"><span class="pill-ico"><i class="fa-solid fa-bullseye"></i></span><span class="label">Goals</span></button>
+      <button id="pill-me" title="My player"><span class="pill-ico"><i class="fa-solid fa-id-card"></i></span><span class="label">My player</span></button>
+      <button id="pill-settings" title="Settings"><span class="pill-ico"><i class="fa-solid fa-gear"></i></span><span class="label">Settings</span></button>
+      <button id="pill-notifs" title="Notifications" hidden><span class="pill-ico"><i class="fa-solid fa-bell"></i><span class="notif-badge" id="pill-notif-badge" hidden></span></span><span class="label">Alerts</span></button>
+    </div>
+
+    <main id="main">
+      <header id="topbar">
+        <img class="top-logo" src="coolsite/logo.svg" alt="SplatGPT logo" />
+        <div class="top-title" id="view-title">Chat</div>
+        <div class="game-toggle" role="tablist" aria-label="Select game">
+          <button data-game="Splatoon1" role="tab">Splatoon 1</button>
+          <button data-game="Splatoon2" role="tab">Splatoon 2</button>
+          <button data-game="Splatoon3" role="tab" class="active">Splatoon 3</button>
+        </div>
+        <div class="live-subtabs" id="topbar-subtabs" hidden>
+          <button data-live-sec-btn="rotations" class="active"><i class="fa-solid fa-arrows-rotate"></i> Rotations</button>
+          <button data-live-sec-btn="top500"><i class="fa-solid fa-trophy"></i> Top 500</button>
+          <button data-live-sec-btn="salmon"><i class="fa-solid fa-fish"></i> Salmon Run</button>
+          <button data-live-sec-btn="builds"><i class="fa-solid fa-shirt"></i> Builds</button>
+        </div>
+        <button id="refresh-live" class="icon-btn" title="Refresh" hidden><i class="fa-solid fa-rotate-right"></i></button>
+        <button id="topbar-new" class="icon-btn" title="New chat"><i class="fa-solid fa-pen-to-square"></i></button>
+      </header>
+
+      <!-- Chat view -->
+      <section id="view-chat" class="view">
+        <div id="chat"></div>
+        <div id="suggestions">
+          <button data-q="What is the current X Battle rotation?"><i class="fa-solid fa-crosshairs"></i> Current X Battle rotation</button>
+          <button data-q="List all modes"><i class="fa-solid fa-gamepad"></i> List modes</button>
+          <button data-q="Show the Top 500 X leaderboard"><i class="fa-solid fa-trophy"></i> Top 500</button>
+        </div>
+        <form id="input-bar">
+          <input id="input" autocomplete="off" placeholder="Ask about weapons, maps, modes, or rotations…" />
+          <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+        <div class="disclaimer">Community reference tool. Not affiliated with Nintendo. Data sources are credited in Settings → About. <span id="app-version"></span></div>
+      </section>
+
+      <!-- Live view -->
+      <section id="view-live" class="view" hidden>
+        <div class="page">
+          <div id="live-sec-rotations">
+            <p class="muted">What's live right now — open a card for the full day ahead.</p>
+            <div id="rotations-grid"></div>
+          </div>
+          <div id="live-sec-top500" hidden>
+            <p class="muted">Latest full Top 500 per mode and division.</p>
+            <div id="live-top500-box"></div>
+          </div>
+          <div id="live-sec-salmon" hidden>
+            <p class="muted">Current and next Grizzco shifts.</p>
+            <div id="live-salmon-grid"></div>
+          </div>
+          <div id="live-sec-builds" hidden>
+            <div class="bb-bar">
+              <div class="bb-find">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="bb-search" type="text" autocomplete="off" placeholder="Search a weapon…" aria-label="Search a weapon" />
+                <div id="bb-results" class="bb-results" hidden></div>
+              </div>
+              <div class="bb-sort" role="group" aria-label="Sort kits">
+                <button data-bb-sort="popular" class="active">Most edited</button>
+                <button data-bb-sort="new">Newest</button>
+                <button data-bb-sort="name">A–Z</button>
+              </div>
+              <span id="bb-status" class="bb-count"></span>
+            </div>
+            <div id="bb-summary"></div>
+            <div id="bb-grid" class="builds-browser"></div>
+            <div class="bb-more"><button id="bb-more" hidden><i class="fa-solid fa-chevron-down"></i> Show more</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Home view: user-arranged dashboard of widgets -->
+      <section id="view-home" class="view" hidden>
+        <div class="page wide">
+          <div class="page-actions">
+            <button id="home-edit" class="primary"><i class="fa-solid fa-pen"></i> <span id="home-edit-label">Edit layout</span></button>
+            <span id="home-hint" class="count-pill">Drag to move · corner to resize · double-click to remove</span>
+          </div>
+          <div id="home-editbar" hidden>
+            <button id="home-add" class="primary"><i class="fa-solid fa-plus"></i> Add widget</button>
+            <label class="snap-toggle"><input type="checkbox" id="home-snap" /> <span>Snap to grid</span></label>
+            <button id="home-reset"><i class="fa-solid fa-rotate-left"></i> Reset layout</button>
+            <span class="muted">Click to add:</span>
+            <div class="chips" id="home-shelf-list"></div>
+          </div>
+          <div id="home-canvas"><div id="home-grid" class="home-grid"></div></div>
+        </div>
+      </section>
+
+      <!-- Chats view -->
+      <section id="view-chats" class="view" hidden>
+        <div class="page">
+          <div class="page-actions">
+            <button id="chats-new" class="primary"><i class="fa-solid fa-plus"></i> New chat</button>
+            <span id="recents-count" class="count-pill"></span>
+            <button id="clear-chats"><i class="fa-solid fa-trash-can"></i> Clear all</button>
+          </div>
+          <p class="muted">Every conversation, stored locally in this browser. Start a new one or pick up where you left off.</p>
+          <div id="recents-list"></div>
+        </div>
+      </section>
+
+      <!-- Settings view -->
+      <section id="view-settings" class="view" hidden>
+        <div class="page">
+          <p class="muted">Stored locally in this browser only. Nothing leaves your device except the public APIs the app already uses.</p>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-palette"></i> Appearance</h3>
+            <label class="field"><span>Theme</span>
+              <select id="setting-theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+            <div class="field"><span>Accent</span>
+              <div class="swatches">
+                <button data-accent-pick="ink" title="Ink blue"><i class="fa-solid fa-droplet"></i> Ink</button>
+                <button data-accent-pick="turf" title="Turf lime"><i class="fa-solid fa-flag"></i> Turf</button>
+                <button data-accent-pick="magenta" title="Magenta"><i class="fa-solid fa-fire"></i> Magenta</button>
+                <button data-accent-pick="aqua" title="Aqua"><i class="fa-solid fa-fish"></i> Aqua</button>
+                <button data-accent-pick="gold" title="Gold"><i class="fa-solid fa-medal"></i> Gold</button>
+                <button data-accent-pick="violet" title="Violet"><i class="fa-solid fa-gem"></i> Violet</button>
+              </div>
+            </div>
+            <div class="field"><span>Custom</span>
+              <div class="row" style="margin-top:0">
+                <input type="color" id="setting-custom-color" class="color-pick" value="#6e8bff" title="Pick a custom accent color" />
+                <span class="muted">Pick any color to use it as the accent.</span>
+              </div>
+            </div>
+            <div class="field"><span>Tour</span>
+              <div class="row" style="margin-top:0">
+                <button id="setting-tour"><i class="fa-solid fa-route"></i> Replay guided tour</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+            <p class="muted">Use the full sidebar, or a floating pill docked to an edge. The pill shows icons only until you hover it.</p>
+            <div class="field"><span>Style</span>
+              <div class="swatches" id="nav-style-picks">
+                <button data-nav-mode="sidebar" title="Full sidebar"><i class="fa-solid fa-table-columns"></i> Sidebar</button>
+                <button data-nav-mode="pill" title="Floating pill"><i class="fa-solid fa-circle"></i> Pill</button>
+              </div>
+            </div>
+            <div class="field" id="nav-pos-field"><span>Pill position</span>
+              <div class="swatches" id="nav-pos-picks">
+                <button data-nav-pos="top" title="Dock top"><i class="fa-solid fa-arrow-up"></i> Top</button>
+                <button data-nav-pos="left" title="Dock left"><i class="fa-solid fa-arrow-left"></i> Left</button>
+                <button data-nav-pos="right" title="Dock right"><i class="fa-solid fa-arrow-right"></i> Right</button>
+                <button data-nav-pos="bottom" title="Dock bottom"><i class="fa-solid fa-arrow-down"></i> Bottom</button>
+              </div>
+            </div>
+            <div class="field"><span>Home page</span>
+              <div class="row" style="margin-top:0">
+                <button id="setting-home-open"><i class="fa-solid fa-table-cells-large"></i> Open Home</button>
+                <button id="setting-home-reset"><i class="fa-solid fa-rotate-left"></i> Reset layout</button>
+              </div>
+              <label class="field"><span>Open on launch</span>
+                <select id="setting-home-launch">
+                  <option value="home">Home dashboard</option>
+                  <option value="chat">Chat</option>
+                </select>
+              </label>
+              <p class="muted" style="margin-top:8px">Widgets are arranged by drag, resized from their corner handle, and saved in this browser.</p>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-cloud-arrow-down"></i> Build fetcher</h3>
+            <p class="muted">Community kits come from a snapshot of <a href="https://sendou.ink/builds" target="_blank" rel="noopener">sendou.ink/builds</a>. Pick the size below — heavy downloads 220 kits for all 77 weapons (16,389 total). Turn it off to skip the download entirely; the app then links out to sendou.ink instead of showing kits.</p>
+            <label class="field"><span>Download builds</span>
+              <select id="setting-builds">
+                <option value="startup">At startup (recommended)</option>
+                <option value="ondemand">On demand — only when a build question is asked</option>
+                <option value="off">Off — just link to sendou.ink</option>
+              </select>
+            </label>
+            <label class="field"><span>How much to download</span>
+              <select id="setting-builds-size">
+                <option value="1">Light — 1.3 MB · 3,080 kits · 40 per weapon</option>
+                <option value="large">Heavy — 7.2 MB · 16,389 kits · 220 per weapon</option>
+              </select>
+            </label>
+            <div class="row">
+              <button id="setting-builds-now"><i class="fa-solid fa-download"></i> Fetch now</button>
+              <button id="setting-builds-forget"><i class="fa-solid fa-eraser"></i> Clear cache</button>
+              <span id="setting-builds-state" class="muted">Checking…</span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-id-card"></i> My player card</h3>
+            <p class="muted">Save the SplatTag name and the 8-digit SplatNet ID shown under your profile in the app. Used to track yourself in Top 500 boards and goals.</p>
+            <label class="field"><span>SplatTag name</span>
+              <input id="setting-player-name" type="text" autocomplete="off" placeholder="e.g. omar" />
+            </label>
+            <label class="field"><span>SplatNet ID</span>
+              <input id="setting-player-id" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 4871556901" maxlength="12" />
+            </label>
+            <div class="row">
+              <button id="setting-player-save" class="primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+              <button id="setting-player-clear"><i class="fa-solid fa-eraser"></i> Clear</button>
+              <span id="setting-player-saved" class="muted"></span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-address-card"></i> About you</h3>
+            <p class="muted">Tell me once and I'll remember it across chats — used to tailor answers. Stored in this browser only.</p>
+            <label class="field"><span>Name or nickname</span>
+              <input id="setting-me-name" type="text" autocomplete="off" placeholder="What should I call you?" />
+            </label>
+            <label class="field"><span>Main weapon</span>
+              <input id="setting-me-weapon" type="text" autocomplete="off" placeholder="e.g. Splattershot, N-ZAP '89" list="weapon-names" />
+            </label>
+            <label class="field"><span>Favourite mode</span>
+              <input id="setting-me-mode" type="text" autocomplete="off" placeholder="e.g. Splat Zones, Anarchy Battle" />
+            </label>
+            <label class="field"><span>Division</span>
+              <select id="setting-me-div">
+                <option value="">Not set</option>
+                <option value="Takoroka">Takoroka</option>
+                <option value="Tentatek">Tentatek</option>
+              </select>
+            </label>
+            <label class="field"><span>Experience</span>
+              <select id="setting-me-skill">
+                <option value="">Not set</option>
+                <option value="casual">Casual / low stakes</option>
+                <option value="regular">Regular player</option>
+                <option value="competitive">Competitive grinder</option>
+              </select>
+            </label>
+            <div class="field"><span>Preferences</span>
+              <div class="chips" id="setting-me-style-chips"></div>
+              <div class="row" style="margin-top:8px">
+                <input id="setting-me-style" type="text" autocomplete="off" placeholder="Add a preference, e.g. no long monologues" />
+                <button id="setting-me-style-add"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <button id="setting-me-save" class="primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+              <span id="setting-me-saved" class="muted"></span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-key"></i> sendou.ink API token <span class="tag">optional</span></h3>
+            <p class="muted">Build pages need no token. Token-gated lookups (user profiles, tournaments) need a free personal token from <a href="https://sendou.ink/api" target="_blank" rel="noopener">sendou.ink/api</a>. It is kept in localStorage and only sent to sendou.ink.</p>
+            <label class="field"><span>Token</span>
+              <input id="setting-sendou-token" type="password" autocomplete="off" placeholder="Paste token…" />
+            </label>
+            <div class="row">
+              <button id="setting-save-token"><i class="fa-solid fa-floppy-disk"></i> Save token</button>
+              <button id="setting-clear-token"><i class="fa-solid fa-eraser"></i> Remove</button>
+              <span id="setting-saved" class="muted"></span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-user-astronaut"></i> What the app knows about you</h3>
+            <div id="profile-box"><p class="muted">Loading…</p></div>
+            <div class="row">
+              <button id="profile-reset"><i class="fa-solid fa-eraser"></i> Reset learned preferences</button>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-circle-info"></i> About</h3>
+            <p class="muted">Terms of use, data sources, and credits.</p>
+            <div class="row">
+              <button id="open-about"><i class="fa-solid fa-arrow-right"></i> Open About</button>
+            </div>
+          </div>
+
+          <div class="settings-card danger">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Local data</h3>
+            <div class="row">
+              <button id="setting-wipe"><i class="fa-solid fa-trash-can"></i> Erase chats & settings on this device</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About view (full page, opened from Settings) -->
+      <section id="view-about" class="view" hidden>
+        <div class="page">
+          <div class="page-actions">
+            <button id="about-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-file-lines"></i> What is this?</h3>
+            <p class="muted">SplatGPT is a fan-made, static reference-based assistant for Splatoon 1, 2, and 3. It searches community created datasets, shows live rotations, archived X rankings, and links to competitive build resources. There is no account system and no server: the site is static files, and your chats, settings, and what it learns about you stay in this browser and are private.</p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-scale-balanced"></i> Terms of use</h3>
+            <p class="muted">This is an unofficial fan project. Not affiliated with, endorsed, or sponsored by Nintendo. Splatoon and all related game content are trademarks of Nintendo. Data is provided as-is for reference; rotations, rankings, and builds can change at any time. Do not enter Nintendo, sendou.ink, or other account passwords here — the only token this app accepts is a sendou.ink read token, stored locally and sent only to sendou.ink.</p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-database"></i> Data sources & credits</h3>
+            <p class="muted"><ul>
+              <li>Local datasets (community-contributed data on weapons, maps, modes, story mode, etc)</li>
+              <li>Mined game parameters and text (weapon stats, kits, gear, abilities, Salmonids): <a href="https://gitlab.com/AeonSake2/splat3-data" target="_blank" rel="noopener">splat3-data</a>, imported via <code>scripts/import_gamedata.py</code></li>
+              <li>Live rotations, salmon run shifts, icons, and X Battle data from <a href="https://splatoon3.ink" target="_blank" rel="noopener">splatoon3.ink</a></li>
+              <li>Ranking snapshots: SplatNet 3 via <a href="https://github.com/cesaregarza/SplatNet3_Scraper" target="_blank" rel="noopener">splatnet3-scraper</a></li>
+              <li>Community build kits: scraped ahead of time from <a href="https://sendou.ink/builds" target="_blank" rel="noopener">sendou.ink/builds</a> by <code>scripts/fetch_builds.py</code> and served from <code>data/builds.json</code> (sendou.ink is AGPL-3.0; its data is credited here and linked from every build card). sendou.ink sets no CORS headers, so builds are snapshotted at build time rather than fetched live. Refreshed daily by the <code>update-builds</code> GitHub Action.</li>
+              <li>Gear and ability reference cross-checked against <a href="https://stat.ink" target="_blank" rel="noopener">stat.ink</a>'s public API; gear and ability images via the sendou.ink public asset CDN</li>
+              <li>Your chats, notes and learned preferences never leave this browser</li>
+              <li>Some icons from Font Awesome.</li>
+            </ul></p>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-handshake-angle"></i> Contributing</h3>
+            <p class="muted">Contributing is currently not supported.</p>
+          </div>
+        </div>
+      </section>
+      <!-- My player view -->
+      <section id="view-me" class="view" hidden>
+        <div class="page narrow">
+          <div class="page-actions">
+            <button id="me-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button id="me-edit" class="primary"><i class="fa-solid fa-pen"></i> Edit</button>
+          </div>
+          <div id="me-editor" class="settings-card" hidden>
+            <h3><i class="fa-solid fa-id-card"></i> Edit your player card</h3>
+            <p class="muted">The SplatTag under your name in-game, and the ID shown on your SplatNet profile. Stored in this browser only.</p>
+            <label class="field"><span>SplatTag name</span>
+              <input id="me-edit-name" type="text" autocomplete="off" placeholder="e.g. omar" />
+            </label>
+            <label class="field"><span>SplatNet ID</span>
+              <input id="me-edit-id" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 4871556901" maxlength="12" />
+            </label>
+            <label class="field"><span>Division</span>
+              <select id="me-edit-div">
+                <option value="">Not sure — search both</option>
+                <option value="Takoroka">Takoroka</option>
+                <option value="Tentatek">Tentatek</option>
+              </select>
+            </label>
+            <div class="row">
+              <button id="me-edit-save" class="primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+              <button id="me-edit-cancel"><i class="fa-solid fa-xmark"></i> Cancel</button>
+              <span id="me-edit-msg" class="muted"></span>
+            </div>
+          </div>
+          <div id="me-card"></div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-magnifying-glass"></i> Find me on the boards</h3>
+            <p class="muted">Looks your SplatTag up in the latest X Power Top 500 for each mode. Set your name or ID in Settings → My player card.</p>
+            <div class="row">
+              <button id="me-lookup"><i class="fa-solid fa-trophy"></i> Look me up</button>
+              <span id="me-lookup-state" class="muted"></span>
+            </div>
+            <div id="me-lookup-out"></div>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-bell"></i> Alerts for you</h3>
+            <p class="muted">Watching your own boards reuses the same alert system as any other player: when your rank or X Power moves between checks, the bell shows up in navigation. Nothing is polled while the tab is closed.</p>
+          </div>
+        </div>
+      </section>
+      <!-- Notifications view -->
+      <section id="view-notifs" class="view" hidden>
+        <div class="page">
+          <div class="page-actions">
+            <button id="notifs-clear"><i class="fa-solid fa-trash-can"></i> Clear all</button>
+          </div>
+          <p class="muted">Rank alerts for watched players. Open a Top 500 name, then Watch, to get them.</p>
+          <div id="notifs-list"></div>
+        </div>
+      </section>
+      <!-- Full day-ahead schedule view -->
+      <section id="view-schedule" class="view" hidden>
+        <div class="page">
+          <div class="page-actions">
+            <button id="schedule-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          </div>
+          <p class="muted">Every upcoming rotation for this mode, furthest first — up to 10 ahead.</p>
+          <div id="schedule-detail"></div>
+        </div>
+      </section>
+      <!-- Goals view -->
+      <section id="view-goals" class="view" hidden>
+        <div class="page">
+          <div class="page-actions">
+            <button id="goal-new"><i class="fa-solid fa-plus"></i> New goal</button>
+          </div>
+          <p class="muted">Chase an X Power, a rank, or your own grind — with live board context and pace estimates.</p>
+          <div id="goals-list"></div>
+        </div>
+      </section>
+      <!-- New goal view (full page) -->
+      <section id="view-goal-new" class="view" hidden>
+        <div class="page narrow">
+          <div class="page-actions">
+            <button id="goal-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-bullseye"></i> New goal</h3>
+            <label class="field"><span>Type</span>
+              <select id="goal-type">
+                <option value="xpower">X Power target</option>
+                <option value="rank">Rank target</option>
+                <option value="top500">Top 500 entry (live cutoff)</option>
+                <option value="custom">Custom (badges, wins…)</option>
+                <option value="quest">Quest (checklist, no numbers)</option>
+              </select>
+            </label>
+            <div id="goal-xfields">
+              <label class="field"><span>Mode</span>
+                <select id="goal-mode">
+                  <option value="splatzones">Splat Zones</option>
+                  <option value="towercontrol">Tower Control</option>
+                  <option value="rainmaker">Rainmaker</option>
+                  <option value="clamblitz">Clam Blitz</option>
+                </select>
+              </label>
+              <label class="field"><span>Division</span>
+                <select id="goal-div">
+                  <option value="p">Takoroka</option>
+                  <option value="a">Tentatek</option>
+                </select>
+              </label>
+            </div>
+            <div id="goal-custom-fields" hidden>
+              <label class="field"><span>Name</span>
+                <input id="goal-title" type="text" autocomplete="off" placeholder="e.g. Grizzco badge grind" />
+              </label>
+              <label class="field" id="goal-unit-row"><span>Unit</span>
+                <input id="goal-unit" type="text" autocomplete="off" placeholder="e.g. wins" />
+              </label>
+            </div>
+            <div id="goal-quest-fields" hidden>
+              <label class="field"><span>Steps</span>
+                <textarea id="goal-steps" rows="4" placeholder="One step per line, e.g.&#10;Reach S+ in Anarchy&#10;Try three different weapons&#10;Win a match without getting splatted"></textarea>
+              </label>
+            </div>
+            <label class="field" id="goal-current-row"><span>Current</span>
+              <input id="goal-current" type="number" inputmode="decimal" placeholder="Where you are now" />
+            </label>
+            <label class="field" id="goal-current-xp-row" hidden><span>Current XP</span>
+              <input id="goal-current-xp" type="number" inputmode="decimal" placeholder="Your XP right now (for rank goals)" />
+            </label>
+            <label class="field" id="goal-target-row"><span>Target</span>
+              <input id="goal-target" type="number" inputmode="decimal" placeholder="Where you want to be" />
+            </label>
+            <div class="row" id="goal-rank-picks" hidden>
+              <button data-rank-pick="10" type="button">Top 10</button>
+              <button data-rank-pick="100" type="button">Top 100</button>
+              <button data-rank-pick="500" type="button">Top 500</button>
+            </div>
+            <div class="row">
+              <button id="goal-create"><i class="fa-solid fa-check"></i> Create goal</button>
+              <span id="goal-err" class="muted"></span>
+            </div>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-lightbulb"></i> Tips</h3>
+            <p class="muted">First X Power goal? Set something like 2000 — the card will build you a starter plan with meta weapons and milestones. Rank goals track from your current rank. Custom goals count upward from zero.</p>
+          </div>
+        </div>
+      </section>
+      <!-- Player detail view -->
+      <section id="view-player" class="view" hidden>
+        <div class="page narrow">
+          <div class="page-actions">
+            <button id="player-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          </div>
+          <div id="player-detail"></div>
+        </div>
+      </section>
+      <!-- Goal detail view (own chat per goal) -->
+      <section id="view-goal-detail" class="view" hidden>
+        <div class="page narrow">
+          <div class="page-actions">
+            <button id="goal-detail-back" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          </div>
+          <div id="goal-detail-head"></div>
+          <div id="goal-chat"></div>
+          <div id="goal-quick"></div>
+          <form id="goal-chat-form">
+            <input id="goal-chat-input" autocomplete="off" placeholder="Talk it out, or type “log 2150”…" />
+            <button type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+          <div class="disclaimer">Your goal coach. Kind, honest, and only as smart as your logs — keep them fresh.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="main.js?v=220"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+[
+  {"id": "turf_war", "name": "Turf War", "description": "Casual 4v4 turf inking in Inkopolis Square.", "ranked": false, "team_size": 4},
+  {"id": "splat_zones", "name": "Splat Zones", "description": "Zone control ranked.", "ranked": true, "team_size": 4},
+  {"id": "tower_control", "name": "Tower Control", "description": "Ride tower ranked.", "ranked": true, "team_size": 4},
+  {"id": "rainmaker", "name": "Rainmaker", "description": "Carry flag ranked.", "ranked": true, "team_size": 4},
+  {"id": "clam_blitz", "name": "Clam Blitz", "description": "Added Dec 2017. Clam basketball ranked.", "ranked": true, "team_size": 4},
+  {"id": "ranked", "name": "Ranked Battle", "description": "C- to X ranks. X Rank added 2018 for top players - precursor to X Battles.", "ranked": true, "team_size": 4},
+  {"id": "league", "name": "League Battle", "description": "2 or 4-stack competitive 2-hour rotations.", "ranked": true, "team_size": "2-4"},
+  {"id": "private_battle", "name": "Private Battle", "description": "Custom lobbies + observing.", "ranked": false, "team_size": "2-8"},
+  {"id": "salmon_run", "name": "Salmon Run", "description": "Debut! 4-player PvE vs Salmonids. Grizzco shifts.", "ranked": false, "team_size": 4},
+  {"id": "splatfest", "name": "Splatfest", "description": "Pearl vs Marina (Off the Hook). Regular vs Pro + Shifty Station.", "ranked": false, "team_size": 4},
+  {"id": "octo_expansion", "name": "Octo Expansion (DLC Hero)", "description": "Play as Agent 8. 80 deep-sea test stations. Escape the Deepsea Metro.", "ranked": false, "team_size": 1}
+]

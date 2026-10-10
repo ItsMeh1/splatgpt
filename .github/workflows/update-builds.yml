@@ -1,0 +1,29 @@
+name: Update community builds (sendou.ink)
+
+on:
+  schedule:
+    - cron: "41 5 * * *"  # daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+- name: Scrape sendou.ink builds (light tier)
+        run: python3 scripts/fetch_builds.py --limit 40 --out data/builds.json
+      - name: Scrape sendou.ink builds (heavy tier)
+        run: python3 scripts/fetch_builds.py --limit 220 --out data/builds-large.json
+      - name: Commit snapshot
+        run: |
+          git config user.name "splatgpt-bot"
+          git config user.email "splatgpt-bot@users.noreply.github.com"
+          git add data/builds.json data/builds-large.json
+          git diff --staged --quiet || git commit -m "🦑 update build kits from sendou.ink"
+          git push

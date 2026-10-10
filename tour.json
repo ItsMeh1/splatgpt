@@ -1,0 +1,50 @@
+[
+  {
+    "id": "welcome",
+    "selector": "#brand",
+    "title": "Welcome to SplatGPT",
+    "text": "The logo takes you home to your dashboard, where widgets live. Use Next or Skip any time."
+  },
+  {
+    "id": "chats",
+    "selector": "#nav-chats",
+    "title": "Chats",
+    "text": "Every conversation in one place. Hit New chat there to start a fresh one; chats save automatically in this browser."
+  },
+  {
+    "id": "live",
+    "selector": "#nav-live",
+    "title": "Live",
+    "text": "Rotations, the latest Top 500, and Salmon Run shifts — each on its own tab, no chat needed."
+  },
+  {
+    "id": "goals",
+    "selector": "#nav-goals",
+    "title": "Goals",
+    "text": "Set X Power, rank, or custom grind goals — tracked with live board data, pace estimates, and streaks."
+  },
+  {
+    "id": "settings",
+    "selector": "#nav-settings",
+    "title": "Settings",
+    "text": "Themes, navigation style (sidebar or a floating pill on any edge), the build fetcher, your player card, what I know about you, and the About page."
+  },
+  {
+    "id": "games",
+    "selector": ".game-toggle",
+    "title": "Game datasets",
+    "text": "Switch the local dataset between Splatoon 1, 2, and 3. Rankings and rotations always reflect Splatoon 3."
+  },
+  {
+    "id": "ask",
+    "selector": "#input",
+    "title": "Ask anything",
+    "text": "Try “current X rotation”, “who is #247?”, “best build for Splattershot”, or “what does Ninja Squid do?”."
+  },
+  {
+    "id": "shortcuts",
+    "selector": "#suggestions",
+    "title": "Shortcuts",
+    "text": "One-tap prompts for the most common lookups. That's the tour — good luck out there."
+  }
+]

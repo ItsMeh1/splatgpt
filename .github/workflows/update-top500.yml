@@ -1,0 +1,29 @@
+name: Update Top500 (splatnet3-scraper)
+
+on:
+  schedule:
+    - cron: "17 */2 * * *"  # every 2 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install splatnet3_scraper requests
+      - run: python scripts/fetch_top500.py
+        env:
+          SN3S_SESSION_TOKEN: ${{ secrets.SN3S_SESSION_TOKEN }}
+      - name: Commit snapshot
+        run: |
+          git config user.name "splatgpt-bot"
+          git config user.email "splatgpt-bot@users.noreply.github.com"
+          git add data/live/top500.json
+          git diff --staged --quiet || git commit -m "🦑 update Top500 snapshot via splatnet3-scraper"
+          git push

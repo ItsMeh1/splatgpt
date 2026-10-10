@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SplatGPT — Ask anything about Splatoon</title>
+  <meta name="description" content="SplatGPT is a fan-made static assistant for Splatoon 1, 2, and 3: live rotations, Top 500, builds, gear, and game data." />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="./"><img src="logo.svg" alt="SplatGPT logo" /> SplatGPT</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#data">Data</a>
+      <a class="btn" href="../index.html">Open app <i class="fa-solid fa-arrow-right"></i></a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="orbs"><span class="orb a"></span><span class="orb b"></span><span class="orb c"></span></div>
+    <div class="ticker"><div class="ticker-track">
+      <span>X Battles</span><span>Turf War</span><span>Anarchy Battle</span><span>Salmon Run</span><span>Top 500</span><span>Splatfest</span><span>Tableturf</span><span>Big Run</span>
+      <span>X Battles</span><span>Turf War</span><span>Anarchy Battle</span><span>Salmon Run</span><span>Top 500</span><span>Splatfest</span><span>Tableturf</span><span>Big Run</span>
+    </div></div>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="kicker"><i class="fa-solid fa-droplet"></i> Fan-made · Static · Free forever</span>
+        <h1>Ask anything<br />about <span class="hl">Splatoon</span>.</h1>
+        <p class="lede">Live rotations, the latest Top 500, competitive builds, 940+ gear items, and real mined game parameters — in one fast assistant with no account and no tracking.</p>
+        <div class="cta-row">
+          <a class="btn big" href="../index.html">Start chatting <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn ghost big" href="../index.html#live">See what's live</a>
+        </div>
+        <p class="tiny">Runs entirely as static files. Chats stay in your browser.</p>
+      </div>
+      <div class="hero-demo">
+        <div class="demo-window">
+          <div class="demo-bar"><span></span><span></span><span></span></div>
+          <div class="demo-msg you">Who is #1 in Tower Control right now?</div>
+          <div class="demo-msg bot"><b>rbst · 4813.8 XP</b><br />Blaster · Takoroka · latest season</div>
+          <div class="demo-msg you">Best build for Splattershot?</div>
+          <div class="demo-msg bot"><b>Suction Bomb / Trizooka · 200p</b><br /><a href="https://sendou.ink/builds/splattershot">sendou.ink builds →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><b>943</b><span>gear items with photos</span></div>
+      <div><b>173</b><span>kits with real stats</span></div>
+      <div><b>500</b><span>ranked players per board</span></div>
+      <div><b>3</b><span>games, one assistant</span></div>
+    </section>
+
+    <section id="features" class="features">
+      <h2>Everything a squid needs</h2>
+      <div class="grid">
+        <div class="card"><i class="fa-solid fa-arrows-rotate"></i><h3>Live rotations</h3><p>X Battles, Turf War, Anarchy, Events, and Salmon shifts with countdown bars, up to the second.</p></div>
+        <div class="card"><i class="fa-solid fa-trophy"></i><h3>Latest Top 500</h3><p>Full Takoroka and Tentatek rankings per mode, refreshed several times daily. Look up any rank.</p></div>
+        <div class="card"><i class="fa-solid fa-shirt"></i><h3>Builds & kits</h3><p>Real kits, special points, prices, and deep links to sendou.ink community builds.</p></div>
+        <div class="card"><i class="fa-solid fa-bag-shopping"></i><h3>943 gear items</h3><p>Every headgear, clothing, and shoe with photos, brands, abilities, and prices.</p></div>
+        <div class="card"><i class="fa-solid fa-database"></i><h3>Mined game data</h3><p>Parameters and text pulled from the actual game files, refreshed monthly.</p></div>
+        <div class="card"><i class="fa-solid fa-lock"></i><h3>Private by design</h3><p>No accounts, no servers, no tracking. Everything lives in your browser.</p></div>
+      </div>
+    </section>
+
+    <section id="data" class="sources">
+      <h2>Powered by open game data</h2>
+      <p>splatoon3.ink · sendou.ink · splat3-data · SplatNet 3 snapshots</p>
+      <a class="btn" href="../index.html">Try it now <i class="fa-solid fa-arrow-right"></i></a>
+    </section>
+  </main>
+
+  <footer>
+    <img src="logo.svg" alt="" />
+    <p>Fan project. Not affiliated with Nintendo. Splatoon is a trademark of Nintendo.</p>
+  </footer>
+</body>
+</html>
